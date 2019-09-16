@@ -7,7 +7,10 @@ const reducer = ((state, action) => {
             return [...state, { title: action.payload, completed: false }]
         case 'completeTask':
             console.log(action.payload)
-            return [...state, {title: action.payload.title, completed: true}]
+            return state.map(task => task.title === action.payload.title
+                ? { ...task, completed: true }
+                : task
+            ) 
         default:
             return state;
     }
@@ -23,10 +26,10 @@ const HomeScreen = ({navigation}) => {
     return (
         <View>
             <View>
-                <Text>Welcome To Tyler's Task App</Text>
+                <Text style={styles.titleStyle}>Welcome To Tyler's Task App</Text>
             </View>
             <View>
-                <View>
+                <View style={styles.inputStyle}>
                     <TextInput
                         placeholder="Add New Task"
                         onChangeText={text => onChangeText(text)}
@@ -41,7 +44,7 @@ const HomeScreen = ({navigation}) => {
                     />
                 </View>
             </View>
-            <View>
+            <View style={styles.navStyle}>
                 <Button 
                     title="Upcoming Tasks"
                     onPress={() => navigation.navigate('Upcoming', {tasks: state, complete: (item) => dispatch({type: 'completeTask', payload: item})})}
@@ -57,8 +60,17 @@ const HomeScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-    textStyle: {
+    titleStyle: {
         fontSize: 25
+    },
+    inputStyle: {
+        borderColor: 'black',
+        borderWidth: 2,
+        fontSize: 20
+    },
+    navStyle: {
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
 });
 

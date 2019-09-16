@@ -10,7 +10,7 @@ const ToDoScreen = ({navigation}) => {
     const complete = navigation.getParam('complete')
     return (
         <View>
-            <Text>Upcoming Tasks</Text>
+            <Text style={styles.textStyle}>Upcoming Tasks</Text>
             
             <View>
                 <FlatList 
@@ -18,7 +18,7 @@ const ToDoScreen = ({navigation}) => {
                     data={tasks}
                     renderItem={({item}) => {
                         if (item.completed === false) {
-                            return <Button  title={item.title} onPress={() => complete(item)}/>
+                            return <Button style={styles.taskStyle} title={item.title} onPress={() => complete(item)}/>
                         }
                     }}
                 />
@@ -30,7 +30,12 @@ const ToDoScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     textStyle: {
-        fontSize: 25
+        fontSize: 30
+    },
+    taskStyle: {
+        fontSize: 20,
+        borderColor: 'black',
+        borderWidth: 1
     }
 });
 

@@ -7,7 +7,7 @@ const CompletedTasksScreen = ({ navigation }) => {
     const tasks = navigation.getParam('tasks', [])
     return (
         <View>
-            <Text>Completed Tasks</Text>
+            <Text style={styles.textStyle}>Completed Tasks</Text>
 
             <View>
                 <FlatList
@@ -27,6 +27,9 @@ const CompletedTasksScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     textStyle: {
+        fontSize: 30
+    },
+    taskStyle: {
         fontSize: 25
     }
 });
